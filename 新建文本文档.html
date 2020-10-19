@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script src="http://libs.baidu.com/jquery/2.1.4/jquery.min.js"></script>
+</head>
+<body>
+    
+    <div id="app">
+        <div class="wrap">
+            <input type="checkbox" @click="showSelectBox">
+            <div class="falseDiv">
+                <input type="text" :value="inputVal">
+                <span>▼</span>
+                <div class="item" id="item" v-show="isShowSelectBox">
+                    <ul ref="selectItem" v-for="item in itemList">
+                        <li >
+                            <div >
+                                <input class="inputItem" name="zq" type="checkbox" :value="item" />{{item}}
+                                
+                            </div>
+                        </li>
+                    </ul>
+                    <div><input type="text" v-model="searchIndex"></div>
+                </div>
+            </div>
+            <button @click="getNames">sss</button>
+            <button @click="scrollToLocation">滚到</button>
+        </div>
+        <div class="pop" style= " width:500px;height:50px;background-color: blue;">sdasdasaddadas</div>
+       
+       
+
+    </div>
+</body>
+
+<script>
+    new Vue({
+        el: "#app",
+        data: {
+            isShowSelectBox: false,
+            inputVal: '',
+            ss:'sss',
+            itemList: ['Q1','Q2','Q3','Q4','Q5','Q6'],
+            newItemList:[],
+            searchIndex: ''
+        },
+        methods: { 
+            showSelectBox(e){
+                console.log(e.target.checked)
+                this.isShowSelectBox = e.target.checked
+            },
+            getNames(){
+                arr = document.getElementsByName("zq");
+                arr.forEach((val,index) => {
+                    if(val.checked){
+                        console.log(val.value,index)
+                        this.newItemList.push(val.value)
+                    }
+                });
+                this.inputVal = this.newItemList.join('、')
+                this.isShowSelectBox = false
+
+            },
+            scrollToLocation() {
+                let mainContainer = document.querySelector('#item')
+                let sList = document.querySelectorAll('.inputItem')
+                console.log(this.searchIndex)
+                let index =0
+                for(let i=0; i<sList.length; i++){
+                    if(sList[i].value.indexOf(this.searchIndex)!==-1){
+                        index = i;
+                        break;
+                    }
+                }
+                let scrollToContainer = sList[index]
+                console.log(scrollToContainer.offsetTop )
+                $(mainContainer).animate({
+                    scrollTop: scrollToContainer.offsetTop
+                }, 1000);
+            }
+            
+       
+        }
+    })
+</script>
+<style>
+    *{
+        padding: 0;
+        margin: 0;
+    }
+    li{
+        list-style: none;
+    }
+    .wrap{
+        
+        display: inline-block;
+    }
+    .falseDiv{
+        display: inline-block;
+        border: 1px solid #D5D5D5;
+        position: relative;
+        height: 30px;
+    }
+    .falseDiv>input{
+        border: 0;
+        height: 30px;
+    }
+    .item{
+        border: 1px solid #D5D5D5;
+        display: inline-block;
+        position: absolute;
+        overflow-y:scroll;
+        height: 60px;
+        top: 30px;
+        left: -1px;
+    }
+</style>
+</html>
+<script type="text/javascript">
+    　　　　$(function(){
+     
+    
+    　　　　　　$(document).bind("click",function(e){
+      　　　　　　  var target  = $(e.target);
+      　　　　　  　if(target.closest(".pop").length == 0){
+          　　　　　　   $(".pop").hide();
+     　　　　　　     }　　　　
+     　　　　　　})
+    　　　　})
+    　　</script>
