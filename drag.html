@@ -41,14 +41,18 @@
     </style>
 </head>
 <body >
-    <div style="display: flex;">
-        <div style="flex: 1; background-color: #ddeeff; height: 800px;"></div>
-        <div class="all" style="flex: 4; background-color: #888;">
+    <div style="display: flex; flex-direction: row;">
+        <div style="width:calc(50% - 400px); background-color: #ddeeff; height: 800px;">
+            <div style="height: 40px;  background-color: #61bb95;">文本框</div>
+            <div style="height: 40px;  background-color: #287bce;">筛选框</div>
+            <div style="height: 40px;  background-color: #b43973;">素材框</div>
+        </div>
+        <div class="all" style="width: 800px; background-color: #888;">
             <div class="box" >
                 <div class="coor"></div>
             </div>
         </div>
-        <div style="flex: 1; background-color: #aaa; height: 800px;"></div>
+        <div style="width: calc(50% - 400px); background-color: #aaa; height: 800px;"></div>
     </div>
    
 </body>

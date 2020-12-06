@@ -9,8 +9,8 @@ $(function() {
                 } : document.move_target.posix,
                 callback = document.call_down || function() {
                     $(this.move_target).css({
-                        'top': (e.pageY - posix.y)<0 ? 0 : (e.pageY - posix.y)>300 ? 300: (e.pageY - posix.y),
-                        'left': (e.pageX - posix.x)<0 ? 0 :(e.pageX - posix.x)>300 ? 300: (e.pageX - posix.x)
+                        'top': e.pageY - posix.y,
+                        'left': e.pageX - posix.x
                     });
                 };
 
@@ -20,21 +20,7 @@ $(function() {
         if(!!this.move) {
             var callback = document.call_up || function() {};
             callback.call(this, e);
-            // console.log($box)
-            // if($box[0].offsetLeft<0){
-            //     console.log( $box[0].offsetLeft)
-            //     $box[0].offsetLeft = 0
-            // }else if($box[0].offsetLeft>(a.width()-$box.width()-a[0].offsetLeft)){
-            //     $box[0].offsetLeft = a.width()-$box.width()-a[0].offsetLeft
-            //     console.log( $box[0].offsetLeft)
-            // }
-            // if($box[0].offsetTop<0){
-            //     console.log( $box[0].offsetTop)
-            //     $box[0].offsetTop = 0
-            // }else if($box[0].offsetTop>(a.height()-$box.height()-a[0].offsetTop)){
-            //     $box[0].offsetTop = a.height()-$box.height()-a[0].offsetTop
-            //     console.log( $box[0].offsetTop)
-            // }
+       
             $.extend(this, {
                 'move': false,
                 'move_target': null,
